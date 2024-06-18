@@ -63,7 +63,7 @@ const SocialLink = ({ icon, tooltip, url }) => {
 const Team = () => {
   const teamMembers = [
     {
-      name: "Mohammed shabin k",
+      name: "Ramanand Kumar Gupta",
       role: "Full Stack Web Developer",
       img: "/team/member-1.jpeg",
       githubUsername: "ramanandkrgupta",
