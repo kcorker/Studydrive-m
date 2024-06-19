@@ -14,15 +14,15 @@ const PostViewDialogBox = ({ isOpen, setIsOpen, data }) => {
   }
 
   const handleDownload = (url, filename) => {
-    saveAs(url, `CollegeNotes.tech-${filename}`);
+    saveAs(url, `cn-${filename}`);
     toast("successfully downloaded");
   };
 
   const SharePost = {
     title: "",
-    content: `Hey! Check out this notes for your best result in exams.\nCourse Name : ${data.course_name}\nFile Title : ${
+    content: `Hey! check out this notes for your best result in exams.\n\n🛂Course Name🛂\n ${data.course_name}\n\n📕File Title 📕\n ${
       data.title
-    } on College Notes!\n#${data.subject_name.replace(/\s/g, "")} #${data.course_name.replace(/\s/g, "")}\n Download Link : \n`,
+    } \n\n#${data.subject_name.replace(/\s/g, "")} #${data.course_name.replace(/\s/g, "")}\n\n 🚀 Download Link 🚀 \n`,
     url: `${process.env.NEXT_PUBLIC_APP_URL}/post/${data.id.slice(
       15
     )}/${data.title.replace(/\s+/g, "-")}`,
