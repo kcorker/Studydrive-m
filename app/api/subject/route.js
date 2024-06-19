@@ -1,11 +1,10 @@
 import prisma from "@/libs/prisma";
-//https://next-auth.js.org/configuration/nextjs#getserversession
 
 export async function GET(req) {
   try {
     const allSubject = await prisma.subject.findMany();
     return new Response(JSON.stringify(allSubject), {
-      status: 200, // Created
+      status: 200,
       headers: {
         "Content-Type": "application/json",
       },
@@ -14,27 +13,23 @@ export async function GET(req) {
     console.error("Error processing the request:", error);
 
     return new Response("An error occurred", {
-      status: 500, // Internal Server Error
+      status: 500,
     });
   }
 }
 
 export async function POST(req) {
-  const { courseName, userSemester, subjectCode, subjectName, userEmail } =
-    await req.json();
+  const { courseName, userSemester, subjectCode, subjectName, userEmail } = await req.json();
 
   try {
-    //find user by email address
     const user = await prisma.user.findFirst({
       where: { email: userEmail },
     });
 
-    // Check if a subject already exists
     const existingSubject = await prisma.subject.findFirst({
       where: { subject_code: subjectCode },
     });
 
-    // this subject already exists
     if (existingSubject) {
       return new Response("This subject already exists", {
         status: 200,
@@ -42,7 +37,6 @@ export async function POST(req) {
       });
     }
 
-    // Create the new subject
     const newSubject = await prisma.subject.create({
       data: {
         userId: user.id,
@@ -54,7 +48,7 @@ export async function POST(req) {
     });
 
     return new Response(JSON.stringify(newSubject), {
-      status: 201, // Created
+      status: 201,
       headers: {
         "Content-Type": "application/json",
       },
@@ -63,7 +57,7 @@ export async function POST(req) {
     console.error("Error processing the request:", error);
 
     return new Response("An error occurred", {
-      status: 500, // Internal Server Error
+      status: 500,
     });
   }
 }
@@ -75,16 +69,43 @@ export async function DELETE(req) {
       where: { id: id },
     });
 
-    // Process the data and send an appropriate response
     return new Response("Request processed successfully", {
       status: 200,
     });
-    
   } catch (error) {
     console.error("Error processing the request:", error);
 
     return new Response("An error occurred", {
-      status: 500, // Internal Server Error
+      status: 500,
+    });
+  }
+}
+
+export async function PUT(req) {
+  const { id, subject_name, course_name, semester_code, subject_code } = await req.json();
+
+  try {
+    const updatedSubject = await prisma.subject.update({
+      where: { id },
+      data: {
+        subject_name,
+        course_name,
+        semester_code,
+        subject_code,
+      },
+    });
+
+    return new Response(JSON.stringify(updatedSubject), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    console.error("Error processing the request:", error);
+
+    return new Response("An error occurred", {
+      status: 500,
     });
   }
 }

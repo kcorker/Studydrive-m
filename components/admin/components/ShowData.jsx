@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { useEffect, useMemo, useState } from "react";
 
 import Table from "./Table";
+import EditForm from "./EditForm";  // Import the EditForm component
 import { useEdgeStore } from "@/libs/edgestore";
 import { useUserPost } from "@/libs/hooks/usePost";
 import { useUserSubject } from "@/libs/hooks/useSubject";
@@ -24,6 +25,8 @@ const ShowData = ({ userID }) => {
 
   const [postData, setPostData] = useState([]);
   const [subjectData, setSubjectData] = useState([]);
+  const [editingData, setEditingData] = useState(null);
+  const [isSubjectEditing, setIsSubjectEditing] = useState(false);
 
   useEffect(() => {
     if (fetchedSubjectData) {
@@ -82,6 +85,18 @@ const ShowData = ({ userID }) => {
         </button>
       ),
     },
+    {
+      accessorKey: "action1",
+      header: "Action1",
+      cell: (info) => (
+        <button
+          onClick={() => handleSubjectEditButton(info.row.original)}
+          className="btn btn-xs sm:btn-sm text-blue-500 hover:text-blue-700 cursor-pointer border-blue-400"
+        >
+          Edit
+        </button>
+      ),
+    },
   ];
 
   /** @type import('@tanstack/react-table').ColumnDef<any> */
@@ -119,9 +134,44 @@ const ShowData = ({ userID }) => {
         </button>
       ),
     },
+    {
+      accessorKey: "action1",
+      header: "Action1",
+      cell: (info) => (
+        <button
+          onClick={() => handlePostEditButton(info.row.original)}
+          className="btn btn-xs sm:btn-sm text-blue-500 hover:text-blue-700 cursor-pointer border-blue-400"
+        >
+          Edit
+        </button>
+      ),
+    },
   ];
 
-  //functions for Post
+  // Functions for editing
+  const handleSubjectEditButton = (data) => {
+    setIsSubjectEditing(true);
+    setEditingData(data);
+  };
+
+  const handlePostEditButton = (data) => {
+    setIsSubjectEditing(false);
+    setEditingData(data);
+  };
+
+  const handleSave = (updatedData) => {
+    if (isSubjectEditing) {
+      setSubjectData((prevData) =>
+        prevData.map((item) => (item.id === updatedData.id ? updatedData : item))
+      );
+    } else {
+      setPostData((prevData) =>
+        prevData.map((item) => (item.id === updatedData.id ? updatedData : item))
+      );
+    }
+  };
+
+  // Functions for Post deletion
   const handlePostDeleteButton = (data) => {
     Swal.fire({
       title: "Delete Document",
@@ -183,7 +233,8 @@ const ShowData = ({ userID }) => {
       }
     });
   };
-  //functions for Subject
+
+  // Functions for Subject deletion
   const handleSubjectDeleteButton = (data) => {
     Swal.fire({
       title: "Delete Subject",
@@ -244,7 +295,7 @@ const ShowData = ({ userID }) => {
 
   return (
     <div className="max-w-sm sm:max-w-none pr-4 overflow-hidden">
-      <h1 className="text-white text-lg font-medium">Your subject</h1>
+      <h1 className="text-white text-lg font-medium">Your Subjects</h1>
       <Table
         data={subjectDatas}
         columns={subjectColumns}
@@ -252,6 +303,14 @@ const ShowData = ({ userID }) => {
       />
       <h1 className="text-white text-lg font-medium">Your Files</h1>
       <Table data={postDatas} columns={postColumns} isLoading={postLoading} />
+      {editingData && (
+        <EditForm
+          data={editingData}
+          onClose={() => setEditingData(null)}
+          onSave={handleSave}
+          isSubject={isSubjectEditing}
+        />
+      )}
     </div>
   );
 };

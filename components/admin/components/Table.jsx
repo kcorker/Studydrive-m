@@ -20,7 +20,7 @@ const Table = ({ data, columns, isLoading }) => {
       globalFilter: filtering,
     },
     initialState: {
-      pagination: { pageSize: 5, pageIndex: 0 },
+      pagination: { pageSize: 10, pageIndex: 0 },
     },
     onGlobalFilterChange: setFiltering,
   });

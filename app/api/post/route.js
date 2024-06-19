@@ -4,16 +4,15 @@ export async function GET() {
   try {
     const allPosts = await prisma.post.findMany();
     return new Response(JSON.stringify(allPosts), {
-      status: 200, // Created
+      status: 200,
       headers: {
         "Content-Type": "application/json",
       },
     });
   } catch (error) {
     console.error("Error processing the request:", error);
-
     return new Response("An error occurred", {
-      status: 500, // Internal Server Error
+      status: 500,
     });
   }
 }
@@ -22,17 +21,14 @@ export async function POST(req) {
   try {
     const { fileDetails, uploadRes, userEmail } = await req.json();
 
-    //find user by email address
     const user = await prisma.user.findFirst({
       where: { email: userEmail },
     });
 
-    // Check if a file already exists
     const existingFiles = await prisma.post.findMany({
       where: { file_name: { in: uploadRes.map((res) => res.filename) } },
     });
 
-    // Check if any of the files already exist
     if (existingFiles.length > 0) {
       const existingFileNames = existingFiles.map((file) => file.file_name);
       return new Response(
@@ -46,7 +42,6 @@ export async function POST(req) {
 
     const createdPosts = [];
 
-    // Iterate over each fileDetails and create a post for each
     for (let i = 0; i < fileDetails.length; i++) {
       const newPost = await prisma.post.create({
         data: {
@@ -66,16 +61,15 @@ export async function POST(req) {
     }
 
     return new Response(JSON.stringify(createdPosts), {
-      status: 201, // Created
+      status: 201,
       headers: {
         "Content-Type": "application/json",
       },
     });
   } catch (error) {
     console.error("Error processing the request:", error);
-
     return new Response("An error occurred", {
-      status: 500, // Internal Server Error
+      status: 500,
     });
   }
 }
@@ -86,16 +80,46 @@ export async function DELETE(req) {
     const deletedPost = await prisma.post.delete({
       where: { id: id },
     });
-    
-    // Process the data and send an appropriate response
     return new Response(JSON.stringify(deletedPost), {
       status: 200,
     });
   } catch (error) {
     console.error("Error processing the request:", error);
-
     return new Response("An error occurred", {
-      status: 500, // Internal Server Error
+      status: 500,
+    });
+  }
+}
+
+export async function PUT(req) {
+  const { id, title, description, category, course_name, semester_code, subject_code, subject_name, file_url, file_name } = await req.json();
+
+  try {
+    const updatedPost = await prisma.post.update({
+      where: { id },
+      data: {
+        title,
+        description,
+        category,
+        course_name,
+        semester_code,
+        subject_code,
+        subject_name,
+        file_url,
+        file_name,
+      },
+    });
+
+    return new Response(JSON.stringify(updatedPost), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    console.error("Error processing the request:", error);
+    return new Response("An error occurred", {
+      status: 500,
     });
   }
 }
