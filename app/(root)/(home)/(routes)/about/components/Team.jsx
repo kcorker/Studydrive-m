@@ -63,42 +63,15 @@ const SocialLink = ({ icon, tooltip, url }) => {
 const Team = () => {
   const teamMembers = [
     {
-      name: "Mohammed shabin k",
-      role: "Team lead | software Engineer",
+      name: "Ramanand Kumar Gupta",
+      role: "Full Stack Web Developer",
       img: "/team/member-1.jpeg",
-      githubUsername: "SHABIN-K",
-      xUsername: "shabink9",
-      linkedinUsername: "-shabink",
+      githubUsername: "ramanandkrgupta",
+      xUsername: "RAMANANDKUMARSAW",
+      linkedinUsername: "ramanand-kumar-saw",
     },
-    {
-      name: "Muhammad Muzammil k",
-      role: "Frontend developer",
-      img: "/team/member-2.jpeg",
-      githubUsername: "muzammilk03",
-      instagramUsername: "muzammilsidhique",
-      linkedinUsername: "muhammed-muzammil-308819281",
-    },
-    {
-      name: "Mohammed Nisham nk",
-      role: "Visual designer",
-      img: "/team/member-5.jpg",
-      githubUsername: "Nisham-N-K",
-      instagramUsername: "nisham_nk",
-      linkedinUsername: "mohammed-nisham-nk-b9a05b267",
-    },
-    {
-      name: "Mufasil",
-      role: "Visual designer",
-      img: "/team/member-3.jpeg",
-      instagramUsername: "mufasill_",
-      linkedinUsername: "Mufasil.Muthu",
-    },
-    {
-      name: "Shefna N",
-      role: "QA Tester",
-      img: "/team/member-4.jpg",
-      instagramUsername: "shefna_n",
-    },
+
+   
   ];
 
   return (
