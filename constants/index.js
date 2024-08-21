@@ -251,13 +251,13 @@ export const semester = [
     link: "six",
     imgUrl: six,
   },
-{
+  {
     id: 7,
     name: "Seventh",
     link: "seven",
     imgUrl: seven,
   },
-{
+  {
     id: 8,
     name: "Eighth",
     link: "eight",
