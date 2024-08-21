@@ -24,11 +24,12 @@ import {
   study,
   syllabus,
   three,
-  seven,
-  eight,
   two,
 
 } from "@/public/icons";
+
+import seven from "@/public/icons/seven.PNG";
+import eight from "@/public/icons/eight.PNG";
 
 export const navlinks = [
   {
