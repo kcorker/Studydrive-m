@@ -256,7 +256,7 @@ export const semester = [
     id: 7,
     name: "Seventh",
     link: "seven",
-    imgUrl: six,
+    imgUrl: seven,
   },
   {
     id: 8,
