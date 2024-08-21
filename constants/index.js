@@ -1,4 +1,4 @@
-import { about, addUser, dashboard, upload , whatsapp, wa, } from "@/public/assets";
+import { about, addUser, dashboard, upload , whatsapp, wa, click } from "@/public/assets";
 import {
   Psychology,
   bba,
