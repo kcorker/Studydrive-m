@@ -24,7 +24,10 @@ import {
   study,
   syllabus,
   three,
+  seven,
+  eight,
   two,
+
 } from "@/public/icons";
 
 export const navlinks = [
@@ -247,5 +250,17 @@ export const semester = [
     name: "Sixth",
     link: "six",
     imgUrl: six,
+  },
+{
+    id: 7,
+    name: "Seventh",
+    link: "seven",
+    imgUrl: seven,
+  },
+{
+    id: 8,
+    name: "Eighth",
+    link: "ehiht",
+    imgUrl: eight,
   },
 ];
