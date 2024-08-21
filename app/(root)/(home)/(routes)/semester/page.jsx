@@ -48,6 +48,7 @@ const UserSemester = () => {
   return (
     <div>
       <h1 className="select_header">Select Semester</h1>
+<small className="text-gray-400">Current: {course}/{category}</small> {/* Display the "name" query parameter */}
       <div className="items-center">
         {category === "Videos" || category === "Syllabus" ? (
           <NoDataFound />
