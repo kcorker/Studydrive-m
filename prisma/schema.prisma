@@ -26,6 +26,7 @@ model subject {
   semester_code String
   subject_code  String
   subject_name  String
+  videos        video[]
 }
 
 model post {
