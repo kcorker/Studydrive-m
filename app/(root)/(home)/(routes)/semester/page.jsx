@@ -50,7 +50,7 @@ const UserSemester = () => {
       <h1 className="select_header">Select Semester</h1>
 <small className="text-gray-400">Current: {course}/{category}</small> {/* Display the "name" query parameter */}
       <div className="items-center">
-        {category === "Videos" || category === "Syllabus" ? (
+        {category === "V" || category === "S" ? (
           <NoDataFound />
         ) : (
           <div className="grid grid-cols-2 mt-[18px] gap-[18px]">
