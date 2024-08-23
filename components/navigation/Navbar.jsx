@@ -227,7 +227,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
-
-
-I want sticky navbar 
+export default Navbar; 
