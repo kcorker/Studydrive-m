@@ -95,7 +95,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#1c1c24] flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6 p-4">
+    <nav className="sticky top-0 z-50 bg-[#1c1c24] flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
       <p className="text-[#32CD32] align-middle text-center subpixel-antialiased text-3xl font-bold hidden sm:block">
         College Notes <span className="badge">.tech</span>
       </p>
