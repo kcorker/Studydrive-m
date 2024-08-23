@@ -112,7 +112,18 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
+<style>
+        {`
+          .sticky-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          }
+        `}
+      </style>
+    <nav className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6 sticky-navbar">
       <p className=" text-[#32CD32] align-middle text-center subpixel-antialiased text-3xl font-bold hidden sm:block">
         College Notes <span className="badge">.tech</span>
       </p>
