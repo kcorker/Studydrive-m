@@ -112,10 +112,9 @@ const Navbar = () => {
   }, []);
 
   return (
-
     <nav className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
-      <p className=" text-[#32CD32] align-middle text-center subpixel-antialiased text-3xl font-bold hidden sm:block">
-        College Notes <span className="badge">.tech</span>
+      <p className=" text-[#4acd8d] align-middle text-center subpixel-antialiased text-3xl font-bold hidden sm:block">
+        College Notes<span className="badge">.tech</span>
       </p>
       <Search
         results={searchedResults}
@@ -159,7 +158,7 @@ const Navbar = () => {
           />
         </div>
 
-        <p className="text-[#32CD32] align-middle text-center subpixel-antialiased text-3xl font-bold">
+        <p className="text-[#4acd8d] align-middle text-center subpixel-antialiased text-3xl font-bold">
           College Notes<span className="badge">.tech</span>
         </p>
 
@@ -227,4 +226,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar; 
+export default Navbar;
