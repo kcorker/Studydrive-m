@@ -1,19 +1,18 @@
 import Feed from "@/components/Feed";
 import { useState } from "react";
-import Image from "next/image";
 
 // Sample banner data
 const bannerData = [
   {
-    src: "/images/banner1.jpg",
+    src: "https://graphicsfamily.com/wp-content/uploads/2020/11/Professional-Web-Banner-AD-in-Photoshop-1024x576.jpg",
     link: "/courses/web-development",
   },
   {
-    src: "/images/banner2.jpg",
+    src: "https://graphicsfamily.com/wp-content/uploads/2020/11/Professional-Web-Banner-AD-in-Photoshop-1024x576.jpg",
     link: "/courses/data-science",
   },
   {
-    src: "/images/banner3.jpg",
+    src: "https://graphicsfamily.com/wp-content/uploads/2020/11/Professional-Web-Banner-AD-in-Photoshop-1024x576.jpg",
     link: "/courses/design",
   },
 ];
