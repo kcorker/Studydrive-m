@@ -2,18 +2,19 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { banner } from "@/public/assets";
 
 const bannerData = [
   {
-    src: "https://graphicsfamily.com/wp-content/uploads/2020/11/Professional-Web-Banner-AD-in-Photoshop-1024x576.jpg",
+    src: "{banner}",
     link: "/courses/web-development",
   },
   {
-    src: "https://graphicsfamily.com/wp-content/uploads/2020/11/Professional-Web-Banner-AD-in-Photoshop-1024x576.jpg",
+    src: "{banner}",
     link: "/courses/data-science",
   },
   {
-    src: "https://graphicsfamily.com/wp-content/uploads/2020/11/Professional-Web-Banner-AD-in-Photoshop-1024x576.jpg",
+    src: "{banner}",
     link: "/courses/design",
   },
 ];
