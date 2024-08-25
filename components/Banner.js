@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { banner } from "@/public/assets/banner.png";
+import banner from "@/public/assets/banner.png"; // Importing the local image correctly
 
 const bannerData = [
   {
@@ -10,11 +10,11 @@ const bannerData = [
     link: "/courses/web-development",
   },
   {
-    src: {banner},
+    src: banner,
     link: "/courses/data-science",
   },
   {
-    src: {banner},
+    src: banner,
     link: "/courses/design",
   },
 ];
