@@ -3,12 +3,14 @@ import Banner from "@/components/Banner";
 
 export default function Home() {
   return (
-    <div className="md:flex">
+    <div className="flex flex-col items-center">
       {/* Banner Section */}
-      <Banner />
+      <div className="w-full">
+        <Banner />
+      </div>
 
       {/* Feed Section */}
-      <div>
+      <div className="w-full px-4 md:px-8">
         <Feed
           label="Discover Courses"
           styleHead="mt-3"
