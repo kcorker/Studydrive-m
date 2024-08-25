@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import { FaBell } from "react-icons/fa";
 import Link from "next/link";
 
-const NOTIFICATION_DURATION = 5000; // 5 seconds
-
 const notifications = [
   { message: "New course on Web Development!", link: "/post/web-development" },
   { message: "50% off on Data Science courses!", link: "/post/data-science" },
@@ -13,34 +11,19 @@ const notifications = [
 ];
 
 export default function Notification() {
-  const [currentNotificationIndex, setCurrentNotificationIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  const [currentNotification, setCurrentNotification] = useState(0);
 
   useEffect(() => {
-    let intervalId;
-
-    if (!isPaused) {
-      intervalId = setInterval(() => {
-        setCurrentNotificationIndex((prevIndex) =>
-          prevIndex === notifications.length - 1 ? 0 : prevIndex + 1
-        );
-      }, NOTIFICATION_DURATION);
-    }
+    const intervalId = setInterval(() => {
+      setCurrentNotification((prevIndex) =>
+        prevIndex === notifications.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000);
 
     return () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
+      clearInterval(intervalId);
     };
-  }, [isPaused]);
-
-  const handlePause = () => {
-    setIsPaused(true);
-  };
-
-  const handleResume = () => {
-    setIsPaused(false);
-  };
+  }, []);
 
   return (
     <div className="w-full flex items-center justify-center p-2">
@@ -51,27 +34,13 @@ export default function Notification() {
         </div>
 
         {/* Notification Message */}
-        <div className="relative w-full h-8 overflow-hidden">
-          <div
-            className="absolute w-full transition-transform duration-1000 ease-in-out"
-            style={{ transform: `translateY(-${currentNotificationIndex * 100}%)` }}
-          >
-            {notifications.map((notification, index) => (
-              <Link href={notification.link} key={index}>
-                <a className="block h-8 flex items-center text-gray-700 hover:text-blue-600 transition-colors">
-                  {notification.message}
-                </a>
-              </Link>
-            ))}
-          </div>
+        <div className="w-full">
+          <Link href={notifications[currentNotification].link}>
+            <a className="block flex items-center text-gray-700 hover:text-blue-600 transition-colors">
+              {notifications[currentNotification].message}
+            </a>
+          </Link>
         </div>
-
-        {/* Pause/Resume Button */}
-        {isPaused ? (
-          <button onClick={handleResume}>Resume</button>
-        ) : (
-          <button onClick={handlePause}>Pause</button>
-        )}
       </div>
     </div>
   );
