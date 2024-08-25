@@ -6,7 +6,7 @@ import { banner } from "@/public/assets/banner.png";
 
 const bannerData = [
   {
-    src: {banner},
+    src: banner,
     link: "/courses/web-development",
   },
   {
