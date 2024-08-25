@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { banner } from "@/public/assets";
+import { banner } from "@/public/assets/banner.png";
 
 const bannerData = [
   {
