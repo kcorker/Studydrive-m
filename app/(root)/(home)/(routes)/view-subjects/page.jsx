@@ -49,7 +49,7 @@ const ViewSubjects = () => {
                   <SubCard
                     key={index}
                     hrefData={{
-                      pathname: `/view-doc`,
+                      pathname: category === "video" ? "/view-vid" : "/view-doc",
                       query: {
                         name: course,
                         category: category,
