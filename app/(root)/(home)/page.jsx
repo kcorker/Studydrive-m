@@ -1,5 +1,6 @@
 import Feed from "@/components/Feed";
 import Banner from "@/components/Banner";
+import Notification from "@/components/Notification";
 
 export default function Home() {
   return (
@@ -7,6 +8,11 @@ export default function Home() {
       {/* Banner Section */}
       <div className="w-full">
         <Banner />
+      </div>
+
+      {/* Notification Section */}
+      <div className="w-full my-4">
+        <Notification />
       </div>
 
       {/* Feed Section */}
