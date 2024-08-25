@@ -16,6 +16,7 @@ import AdminDashIcon from "./AdminDashIcon";
 import SettingIcon from "./SettingIcon";
 import AdminuploadIcon from "./AdminuploadIcon";
 import SmallLoading from "./SmallLoading";
+import banner from "./banner.png"
 
 export {
   addUser,
@@ -35,5 +36,5 @@ export {
   AdminDashIcon,
   SettingIcon,
   AdminuploadIcon,
-  SmallLoading,
+  SmallLoading,banner,
 };
