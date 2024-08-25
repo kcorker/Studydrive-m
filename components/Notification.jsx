@@ -18,7 +18,7 @@ export default function Notification() {
       setCurrentNotification((prevIndex) =>
         prevIndex === notifications.length - 1 ? 0 : prevIndex + 1
       );
-    }, 5000); // Slower speed for smoother transition (5 seconds)
+    }, 5000); // Adjust this duration if needed
     return () => clearInterval(interval);
   }, []);
 
