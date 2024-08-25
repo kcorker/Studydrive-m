@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import banner from "@/public/assets/banner.png"; // Importing the local image correctly
+import banner from "@/public/assets/banner.png"; // Import the local image correctly
 
 const bannerData = [
   {
@@ -34,18 +34,32 @@ export default function Banner() {
   return (
     <div className="relative w-full flex flex-col items-center">
       {/* Banner Section */}
-      <div className="relative w-full flex justify-center">
-        <a href={bannerData[currentIndex].link}>
-          <Image
-            src={bannerData[currentIndex].src}
-            alt={`Banner ${currentIndex + 1}`}
-            width={1024} // Set this to your image's actual width
-            height={576} // Set this to your image's actual height
-            objectFit="contain" // Maintains the aspect ratio
-            priority
-            quality={100}
-          />
-        </a>
+      <div className="relative w-full overflow-hidden flex justify-center">
+        <div
+          className="flex transition-transform duration-1000 ease-in-out"
+          style={{
+            transform: `translateX(-${currentIndex * 100}%)`,
+          }}
+        >
+          {bannerData.map((banner, index) => (
+            <a
+              href={banner.link}
+              key={index}
+              className="min-w-full flex justify-center"
+            >
+              <Image
+                src={banner.src}
+                alt={`Banner ${index + 1}`}
+                width={1024}
+                height={576}
+                className="rounded-lg" // Add a small border radius
+                objectFit="contain"
+                priority
+                quality={100}
+              />
+            </a>
+          ))}
+        </div>
       </div>
 
       {/* Dots Section */}
@@ -53,7 +67,8 @@ export default function Banner() {
         {bannerData.map((_, index) => (
           <span
             key={index}
-            className={`h-3 w-3 rounded-full transition-colors duration-300 ${
+            onClick={() => setCurrentIndex(index)}
+            className={`h-3 w-3 rounded-full transition-colors duration-300 cursor-pointer ${
               index === currentIndex ? "bg-blue-500" : "bg-gray-300"
             }`}
           />
