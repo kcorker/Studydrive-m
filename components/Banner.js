@@ -32,25 +32,33 @@ export default function Banner() {
   }, []);
 
   return (
-    <div className="w-full h-64 relative overflow-hidden">
-      {bannerData.map((banner, index) => (
-        <a
-          href={banner.link}
-          key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentIndex ? "opacity-100" : "opacity-0"
-          }`}
-        >
+    <div className="relative w-full flex flex-col items-center">
+      {/* Banner Section */}
+      <div className="relative w-full flex justify-center">
+        <a href={bannerData[currentIndex].link}>
           <Image
-            src={banner.src}
-            alt={`Banner ${index + 1}`}
-            layout="fill"
-            objectFit="cover"
+            src={bannerData[currentIndex].src}
+            alt={`Banner ${currentIndex + 1}`}
+            width={1024} // Set this to your image's actual width
+            height={576} // Set this to your image's actual height
+            objectFit="contain" // Maintains the aspect ratio
             priority
             quality={100}
           />
         </a>
-      ))}
+      </div>
+
+      {/* Dots Section */}
+      <div className="flex mt-3 space-x-2">
+        {bannerData.map((_, index) => (
+          <span
+            key={index}
+            className={`h-3 w-3 rounded-full transition-colors duration-300 ${
+              index === currentIndex ? "bg-blue-500" : "bg-gray-300"
+            }`}
+          />
+        ))}
+      </div>
     </div>
   );
 }
