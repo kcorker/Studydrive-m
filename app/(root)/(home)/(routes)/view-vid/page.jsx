@@ -44,7 +44,7 @@ const ViewVid = () => {
           <>
             {data.length === 0 ? (
               <NoDataFound />
-            ) : (
+            ,) : (
               <div className="grid md:grid-cols-2 mt-[18px] gap-[10px]">
                 {data.map((item, index) => (
                   <VideoCard key={index} data={item} /> {/* Adjust for VideoCard */}
