@@ -22,14 +22,14 @@ const ViewVid = () => {
   } = useFilterVideos({ course, semester, subId });
 
   useEffect(() => {
-    if (fetchedVideos) {
-      setUserSelectedVideos(fetchedVideos);
-    }
-    if (error) {
-      console.error("Error fetching videos:", error);
-      toast.error("Something went wrong in fetching Videos");
-    }
-  }, [fetchedVideos, error]);
+  if (fetchedVideos) {
+    setUserSelectedVideos(fetchedVideos);
+  }
+  if (error) {
+    console.error("Error fetching videos:", error);
+    toast.error("Something went wrong in fetching Videos");
+  }
+}, [fetchedVideos, error]); // Add an empty dependency array []
 
   const [userSelectedVideos, setUserSelectedVideos] = useState([]);
   const data = useMemo(() => userSelectedVideos, [userSelectedVideos]);
