@@ -1,125 +1,23 @@
-import prisma from "@/libs/prisma";
+// pages/api/videos.js
+import { PrismaClient } from "@prisma/client";
 
-export async function GET() {
-  try {
-    const allVideos = await prisma.video.findMany();
-    return new Response(JSON.stringify(allVideos), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  } catch (error) {
-    console.error("Error processing the request:", error);
-    return new Response("An error occurred", {
-      status: 500,
-    });
-  }
-}
+const prisma = new PrismaClient();
 
-export async function POST(req) {
-  try {
-    const { videoDetails, uploadRes, userEmail } = await req.json();
-
-    const user = await prisma.user.findFirst({
-      where: { email: userEmail },
-    });
-
-    const existingFiles = await prisma.video.findMany({
-      where: { video_name: { in: uploadRes.map((res) => res.videoname) } },
-    });
-
-    if (existingFiles.length > 0) {
-      const existingFileNames = existingFiles.map((video) => video.video_name);
-      return new Response(
-        `These videos already uploaded: ${existingFileNames.join(", ")}`,
-        {
-          status: 200,
-          statusText: "FAILED",
-        }
-      );
-    }
-
-    const createdVideos = [];
-
-    for (let i = 0; i < videoDetails.length; i++) {
-      const newVideo = await prisma.video.create({
-        data: {
-          userId: user.id,
-          course_name: videoDetails[i].course,
-          semester_code: videoDetails[i].semester,
-          subject_code: videoDetails[i].subject.link,
-          subject_name: videoDetails[i].subject.name,
-          title: videoDetails[i].title.trim(),
-          description: videoDetails[i].description.trim(),
-          category: videoDetails[i].category.trim(),
-          video_url: uploadRes[i].url,
-          video_name: uploadRes[i].videoname,
-        },
-      });
-      createdVideos.push(newVideo);
-    }
-
-    return new Response(JSON.stringify(createdVideos), {
-      status: 201,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  } catch (error) {
-    console.error("Error processing the request:", error);
-    return new Response("An error occurred", {
-      status: 500,
-    });
-  }
-}
-
-export async function DELETE(req) {
-  const { id } = await req.json();
-  try {
-    const deletedVideo = await prisma.video.delete({
-      where: { id: id },
-    });
-    return new Response(JSON.stringify(deletedVideo), {
-      status: 200,
-    });
-  } catch (error) {
-    console.error("Error processing the request:", error);
-    return new Response("An error occurred", {
-      status: 500,
-    });
-  }
-}
-
-export async function PUT(req) {
-  const { id, title, description, category, course_name, semester_code, subject_code, subject_name, video_url, video_name } = await req.json();
+export default async function handler(req, res) {
+  const { course, semester, subId } = req.query;
 
   try {
-    const updatedVideo = await prisma.video.update({
-      where: { id },
-      data: {
-        title,
-        description,
-        category,
-        course_name,
-        semester_code,
-        subject_code,
-        subject_name,
-        video_url,
-        video_name,
+    const videos = await prisma.video.findMany({
+      where: {
+        course_name: course,
+        semester_code: semester,
+        subjectId: subId,
       },
+      orderBy: { sequence: "asc" }, // Order by sequence for proper video list order
     });
 
-    return new Response(JSON.stringify(updatedVideo), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    res.status(200).json(videos);
   } catch (error) {
-    console.error("Error processing the request:", error);
-    return new Response("An error occurred", {
-      status: 500,
-    });
+    res.status(500).json({ error: "Error fetching videos" });
   }
 }
