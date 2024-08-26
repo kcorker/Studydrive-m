@@ -3,8 +3,8 @@ import { toast } from "sonner";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
-import VideoCard from "@/components/video/VideoCard"; // Adjust to your video card component
-import { useFilterVideo } from "@/libs/hooks/useVideo"; // New hook to fetch videos
+import VideoCard from "@/components/cards/VideoCard";
+import { useFilterPost } from "@/libs/hooks/usePost";
 import NoDataFound from "@/components/ui/NoDataFound";
 import SkeletonLoading from "@/components/ui/SkeletonLoading";
 
@@ -16,23 +16,21 @@ const ViewVid = () => {
   const category = searchParams.get("category");
 
   const {
-    data: fetchedVideos,
+    data: fetchedData,
     error,
     isLoading: loading,
-  } = useFilterVideo({ course, semester, category, subId });
+  } = useFilterPost({ course, semester, category, subId });
+
+  const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    if (fetchedVideos) {
-      setUserSelectedVideos(fetchedVideos);
+    if (fetchedData) {
+      setVideos(fetchedData);
     }
     if (error) {
-      console.error("Error fetching videos:", error);
-      toast.error("Something went wrong in fetching Videos");
+      toast.error("Something went wrong in fetching videos");
     }
-  }, [fetchedVideos, error]);
-
-  const [userSelectedVideos, setUserSelectedVideos] = useState([]);
-  const data = useMemo(() => userSelectedVideos, [userSelectedVideos]);
+  }, [fetchedData, error]);
 
   return (
     <div>
@@ -42,12 +40,12 @@ const ViewVid = () => {
           <SkeletonLoading />
         ) : (
           <>
-            {data.length === 0 ? (
+            {videos.length === 0 ? (
               <NoDataFound />
             ) : (
               <div className="grid md:grid-cols-2 mt-[18px] gap-[10px]">
-                {data.map((item, index) => (
-                  <VideoCard key={index} data={item} /> 
+                {videos.map((video, index) => (
+                  <VideoCard key={index} video={video} />
                 ))}
               </div>
             )}
