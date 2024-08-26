@@ -19,7 +19,7 @@ const ViewVid = () => {
     data: fetchedVideos,
     error,
     isLoading: loading,
-  } = useFilterVideo({ course, semester, subId });
+  } = useFilterVideo({ course, semester, category, subId });
 
   useEffect(() => {
     if (fetchedVideos) {
