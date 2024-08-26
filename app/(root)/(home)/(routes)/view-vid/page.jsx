@@ -22,14 +22,14 @@ const ViewVid = () => {
   } = useFilterVideos({ course, semester, subId });
 
   useEffect(() => {
-  if (fetchedVideos) {
-    setUserSelectedVideos(fetchedVideos);
-  }
-  if (error) {
-    console.error("Error fetching videos:", error);
-    toast.error("Something went wrong in fetching Videos");
-  }
-}, [fetchedVideos, error]); // Add an empty dependency array []
+    if (fetchedVideos) {
+      setUserSelectedVideos(fetchedVideos);
+    }
+    if (error) {
+      console.error("Error fetching videos:", error);
+      toast.error("Something went wrong in fetching Videos");
+    }
+  }, [fetchedVideos, error]); // Add an empty dependency array []
 
   const [userSelectedVideos, setUserSelectedVideos] = useState([]);
   const data = useMemo(() => userSelectedVideos, [userSelectedVideos]);
@@ -42,7 +42,7 @@ const ViewVid = () => {
           <SkeletonLoading />
         ) : (
           <>
-            ,{data.length === 0 ? (
+            {data.length === 0 ? (
               <NoDataFound />
             ) : (
               <div className="grid md:grid-cols-2 mt-[18px] gap-[10px]">
