@@ -11,6 +11,28 @@ const useVideo = () => {
   };
 };
 
+const useUserVideo = ({ userID }) => {
+  const { data, error, isLoading, mutate } = useSWR(
+    `/api/video/${userID}`,
+    fetcher
+  );
+  return {
+    data,
+    error,
+    isLoading,
+    mutate,
+  };
+};
 
+const useFilterVideo = ({ course, semester, category, subId }) => {
+  const key = `/api/video/filter/${course}/${semester}/${category}/${subId}`;
+  const { data, error, isLoading, mutate } = useSWR(key, fetcher);
+  return {
+    data,
+    error,
+    isLoading,
+    mutate,
+  };
+};
 
-export { useVideo };
+export { useVideo, useUserVideo, useFilterVideo };
