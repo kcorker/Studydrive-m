@@ -1,23 +1,22 @@
 // pages/api/videos.js
-import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
 
-export default async function handler(req, res) {
-  const { course, semester, subId } = req.query;
 
+import prisma from "@/libs/prisma";
+
+export async function GET() {
   try {
-    const videos = await prisma.video.findMany({
-      where: {
-        course_name: course,
-        semester_code: semester,
-        subjectId: subId,
+    const allVideo = await prisma.video.findMany();
+    return new Response(JSON.stringify(allVideo), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
       },
-      orderBy: { sequence: "asc" }, // Order by sequence for proper video list order
     });
-
-    res.status(200).json(videos);
   } catch (error) {
-    res.status(500).json({ error: "Error fetching videos" });
+    console.error("Error processing the request:", error);
+    return new Response("An error occurred", {
+      status: 500,
+    });
   }
 }
