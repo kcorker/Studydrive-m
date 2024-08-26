@@ -9,7 +9,7 @@ const VideoCard = ({ video }) => {
       <div className="video-container mb-2">
         <iframe
           className="w-full h-48"
-          src={video.url || ""}
+          src={video.url}
           title={video.title || "Video"}
           allowFullScreen
         ></iframe>
