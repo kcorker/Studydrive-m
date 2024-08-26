@@ -7,6 +7,7 @@ export async function GET(req, { params }) {
       where: {
         course_name: courseName,
         semester_code: semester,
+        category: category, 
         subject_code: subId,
       },
     });
