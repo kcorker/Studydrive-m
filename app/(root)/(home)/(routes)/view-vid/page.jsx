@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 import VideoCard from "@/components/video/VideoCard";
-import { useFilterPost } from "@/libs/hooks/usePost";
+import { useFilterVideo } from "@/libs/hooks/useVideo";
 import NoDataFound from "@/components/ui/NoDataFound";
 import SkeletonLoading from "@/components/ui/SkeletonLoading";
 
@@ -19,7 +19,7 @@ const ViewVid = () => {
     data: fetchedData,
     error,
     isLoading: loading,
-  } = useFilterPost({ course, semester, category, subId });
+  } = useFilterVideo({ course, semester, category, subId });
 
   const [videos, setVideos] = useState([]);
 
