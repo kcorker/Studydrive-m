@@ -3,7 +3,7 @@ import prisma from "@/libs/prisma";
 export async function GET(req, { params }) {
   const [courseName, semester, category, subId] = params.filtered;
   try {
-    const filteredPost = await prisma.video.findMany({
+    const filteredVideo = await prisma.video.findMany({
       where: {
         course_name: courseName,
         semester_code: semester,
@@ -12,7 +12,7 @@ export async function GET(req, { params }) {
       },
     });
 
-    return new Response(JSON.stringify(filteredPost), {
+    return new Response(JSON.stringify(filteredVideo), {
       status: 200, // Created
       headers: {
         "Content-Type": "application/json",
