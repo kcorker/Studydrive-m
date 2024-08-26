@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
-import VideoCard from "@/components/cards/VideoCard";
+import VideoCard from "@/components/video/VideoCard";
 import { useFilterPost } from "@/libs/hooks/usePost";
 import NoDataFound from "@/components/ui/NoDataFound";
 import SkeletonLoading from "@/components/ui/SkeletonLoading";
