@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 "use client";
 import { toast } from "sonner";
 import { useSearchParams } from "next/navigation";
@@ -60,6 +59,3 @@ const ViewVid = () => {
 };
 
 export default ViewVid;
-=======
-hi
->>>>>>> 53f2ba592c3510dbf08fe68cf2e6f1a7683e3f55
