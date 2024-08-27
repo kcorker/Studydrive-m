@@ -31,7 +31,7 @@ const LoginPage = () => {
       // Validate the user input
       const validation = UserValidation.UserLogin.safeParse(userInput);
 
-      //if validation is failure, return error message
+      // If validation fails, return error message
       if (validation.success === false) {
         const { issues } = validation.error;
         issues.forEach((err) => {
@@ -48,14 +48,35 @@ const LoginPage = () => {
         if (response.error) {
           toast.error(response.error);
         } else {
-          //Redirect to the dashboard on successful login
+          // Redirect to the dashboard on successful login
           toast.success("Successfully Logged in");
           window.location.href = "/dashboard";
         }
       }
     } catch (error) {
       console.error("NEXT_AUTH Error: " + error);
-      toast.error("something went wrong during login attempt");
+      toast.error("Something went wrong during login attempt");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGitHubLogin = async () => {
+    setIsLoading(true);
+    try {
+      // Trigger the GitHub sign-in process
+      const response = await signIn("github", { redirect: false });
+
+      if (response.error) {
+        toast.error(response.error);
+      } else {
+        // Redirect to the dashboard on successful login
+        toast.success("Successfully Logged in with GitHub");
+        window.location.href = "/dashboard";
+      }
+    } catch (error) {
+      console.error("GitHub Login Error: " + error);
+      toast.error("Failed to login with GitHub");
     } finally {
       setIsLoading(false);
     }
@@ -67,7 +88,7 @@ const LoginPage = () => {
         <div>
           <a
             href="/"
-            className="flex items-center mb-6  text-2xl font-semibold text-white"
+            className="flex items-center mb-6 text-2xl font-semibold text-white"
           >
             <Image className="w-8 h-8 mr-2" src={logo} alt="logo" />
             College Notes
@@ -79,7 +100,7 @@ const LoginPage = () => {
               Sign in to your account
             </h1>
 
-            <form className="space-y-4 md:space-y-6">
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               <FormField
                 label="Your email"
                 type="email"
@@ -113,10 +134,23 @@ const LoginPage = () => {
                 />
               </div>
             </form>
+
+            {/* GitHub Login Button */}
+            <div className="flex justify-center mt-4">
+              <button
+                type="button"
+                className="w-full bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+                onClick={handleGitHubLogin}
+                disabled={isLoading}
+              >
+                {isLoading ? "Loading..." : "Login with GitHub"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 };
+
 export default LoginPage;
