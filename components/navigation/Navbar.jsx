@@ -4,6 +4,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link"; // Import Link if you are using it
 
 import Search from "../Search";
 import { navlinks } from "@/constants";
@@ -29,12 +30,12 @@ const Navbar = () => {
   const [isActive, setIsActive] = useState("Home");
   const [toggleDrawer, setToggleDrawer] = useState(false);
 
-  //for search function
+  // for search function
   const [searchText, setSearchText] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
 
-  //for controling fetched data
+  // for controlling fetched data
   const [posts, setPosts] = useState([]);
   const data = useMemo(() => posts, [posts]);
 
@@ -51,25 +52,15 @@ const Navbar = () => {
     }
   }, [fetchedData, error]);
 
-  const handleSearchChange = (e) => {
-    /*
-    Debouncing is a technique used to filter out noise or rapid changes in a signal, typically in input devices like buttons or switches. The debounce method ensures that the event triggered by the input device is only registered after a stable state has been reached.
-    Here's an example JavaScript debounce method:
-
-    function debounce(func, delay) {
-        let timeoutId;
-    return function(...args) {
+  const debounce = (func, delay) => {
+    let timeoutId;
+    return function (...args) {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => func.apply(this, args), delay);
-     };
-    }
+    };
+  };
 
-    This debounce function takes two parameters: func which is the function to be debounced, and delay which is the time in milliseconds to wait for the input device to settle before triggering the event.
-
-    The returned function uses setTimeout to wait for the specified delay before calling the original function passed as func. If another input event is triggered during this waiting period, the timeoutId is cleared and the timer starts again.
-
-     In this way, the debounce function ensures that the original function is only called once, after a certain period of stability.
-     */
+  const handleSearchChange = (e) => {
     clearTimeout(searchTimeout);
     setSearchText(e.target.value);
 
@@ -81,7 +72,7 @@ const Navbar = () => {
     );
   };
 
-  //for navigation
+  // for navigation
   const handleToggleDrawer = () => {
     setToggleDrawer((prev) => !prev);
   };
@@ -93,6 +84,7 @@ const Navbar = () => {
   const handleCloseSearch = () => {
     setSearchText("");
   };
+
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (
@@ -113,7 +105,7 @@ const Navbar = () => {
 
   return (
     <nav className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
-      <p className=" text-[#4acd8d] align-middle text-center subpixel-antialiased text-3xl font-bold hidden sm:block">
+      <p className="text-[#4acd8d] align-middle text-center subpixel-antialiased text-3xl font-bold hidden sm:block">
         College Notes<span className="badge">.tech</span>
       </p>
       <Search
@@ -124,28 +116,7 @@ const Navbar = () => {
         setIsPostOpen={setIsPostOpen}
         setPost={setPost}
       />
-      {/*
-      <div className="md:flex hidden flex-row justify-end gap-4">
-        <button
-          type="button"
-          className={`font-epilogue font-semibold text-[16px] leading-[26px] text-white min-h-[52px] px-4 rounded-[10px] bsg-[#1dc071] bg-[#8c6dfd]`}
-        >
-          Login
-        </button>
-
-        <Link href="/">
-          <div className="w-[52px] h-[52px] rounded-full bg-[#2c2f32] flex justify-center items-center cursor-pointer">
-            <Image
-              src={search}
-              alt="user"
-              className="w-[60%] h-[60%] object-contain"
-            />
-          </div>
-        </Link>
-      </div>
-*/}
       {/* Small screen navigation */}
-
       <div className="sm:hidden flex justify-between items-center relative">
         <div
           className="w-[40px] h-[40px] rounded-[10px] bg-[#2c2f32] flex justify-center items-center cursor-pointer"
@@ -179,7 +150,7 @@ const Navbar = () => {
         <div
           className={`${
             toggleDrawer ? "translate-x-0" : "-translate-x-full"
-          } fixed top-0 bottom-0 left-0 rounded-r-[10px] bg-[#1c1c24] z-10  py-5 w-[250px] transition-transform duration-1000 `}
+          } fixed top-0 bottom-0 left-0 rounded-r-[10px] bg-[#1c1c24] z-10 py-5 w-[250px] transition-transform duration-1000`}
           ref={sidebarRef}
         >
           <ul className="mb-4 p-3">
