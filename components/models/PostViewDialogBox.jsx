@@ -13,7 +13,9 @@ const PostViewDialogBox = ({ isOpen, setIsOpen, data }) => {
     setIsOpen(false);
   }
 
-  const handleDownload = (url, filename) => {
+  const handleDownload = (url, filename) => if (data.premium) {
+      toast("This is a premium file. You need a premium membership to download it.");
+    } else {
     saveAs(url, `cn-${filename}`);
     toast("successfully downloaded");
   };
@@ -83,7 +85,8 @@ const PostViewDialogBox = ({ isOpen, setIsOpen, data }) => {
                       handleDownload(data.file_url, data.file_name)
                     }
                   >
-                    Download
+                    {data.premium ? "Premium File - Upgrade to Download" : "Download"}
+    
                   </button>
                   <button
                     type="button"
