@@ -16,12 +16,15 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // Update the active state based on the current pathname
-    const activeLink = navlinks.find((link) => pathname.startsWith(link.link));
-    if (activeLink) {
-      setIsActive(activeLink.name);
-    } else {
+    // Always set "Home" as active if the user is on the home page
+    if (pathname === "/") {
       setIsActive("Home");
+    } else {
+      // Update the active state based on the current pathname
+      const activeLink = navlinks.find((link) => pathname.startsWith(link.link));
+      if (activeLink) {
+        setIsActive(activeLink.name);
+      }
     }
   }, [pathname]);
 
