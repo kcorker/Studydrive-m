@@ -27,7 +27,6 @@ const Navbar = () => {
   const [isPostOpen, setIsPostOpen] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
-  const [isActive, setIsActive] = useState("Home");
   const [toggleDrawer, setToggleDrawer] = useState(false);
 
   // for search function
@@ -103,6 +102,10 @@ const Navbar = () => {
     };
   }, []);
 
+  // Determine the active link based on the current URL
+  const currentPath = router.pathname;
+  const activeLink = navlinks.find((link) => link.link === currentPath);
+
   return (
     <nav className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
       <p className="text-[#4acd8d] align-middle text-center subpixel-antialiased text-3xl font-bold hidden sm:block">
@@ -158,10 +161,9 @@ const Navbar = () => {
               <li
                 key={data.name}
                 className={`flex p-4 ${
-                  isActive === data.name && "bg-[#3a3a43]"
+                  activeLink && activeLink.name === data.name && "bg-[#3a3a43]"
                 } hover:bg-[#2c2f32] rounded-full`}
                 onClick={() => {
-                  setIsActive(data.name);
                   setToggleDrawer(false);
                   data.btn ? setIsOpen(true) : router.push(data.link);
                 }}
@@ -170,12 +172,16 @@ const Navbar = () => {
                   src={data.imgUrl}
                   alt={data.name}
                   className={`w-[24px] h-[24px] object-contain ${
-                    isActive === data.name ? "grayscale-0" : "grayscale"
+                    activeLink && activeLink.name === data.name
+                      ? "grayscale-0"
+                      : "grayscale"
                   }`}
                 />
                 <p
                   className={`ml-[20px] font-epilogue font-semibold text-[14px] ${
-                    isActive === data.name ? "text-[#1dc071]" : "text-[#808191]"
+                    activeLink && activeLink.name === data.name
+                      ? "text-[#1dc071]"
+                      : "text-[#808191]"
                   }`}
                 >
                   {data.name}
