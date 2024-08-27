@@ -41,6 +41,7 @@ model post {
   title         String
   description   String
   category      String?
+premium   Boolean  @default(false) // Add this line
   file_url      String?
   file_name     String?
   createdAt     DateTime @default(now())
@@ -68,4 +69,7 @@ model video {
 enum Role {
   USER
   ADMIN
+  FREE
+  PRO
+
 }
