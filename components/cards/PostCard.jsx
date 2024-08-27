@@ -18,8 +18,8 @@ const PostCard = ({ data }) => {
       title={data.description}
       onClick={() => setIsOpen(true)}
     >
-<div className="absolute top-0 left-0 w-10 h-10">
-              <Image src={newt} alt="New Tag Icon" className="" />
+<div className="absolute top-0 right-0 w-10 h-10">
+              <Image src={newt} alt="New Tag Icon" className="w-20" />
               {/* You can add CSS classes like animate-pulse for a pulsing effect */}
             </div>
       <div className="flex flex-row items-center relative"> {/* Added relative positioning here */}
