@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import doc from "public/icons/doc.png";
 import fire from "public/icons/fire.png"; // Add your fire image or animation here
-import new from "public/icons/new.png";
+import newt from "public/icons/new.png";
 import PostViewDialogBox from "../models/PostViewDialogBox";
 
 const PostCard = ({ data }) => {
@@ -19,7 +19,7 @@ const PostCard = ({ data }) => {
       onClick={() => setIsOpen(true)}
     >
 <div className="absolute top-0 left-0 w-10 h-10">
-              <Image src={new} alt="New Tag Icon" className="" />
+              <Image src={newt} alt="New Tag Icon" className="" />
               {/* You can add CSS classes like animate-pulse for a pulsing effect */}
             </div>
       <div className="flex flex-row items-center relative"> {/* Added relative positioning here */}
