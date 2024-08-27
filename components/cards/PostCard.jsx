@@ -21,13 +21,10 @@ const PostCard = ({ data }) => {
         <div className="">
           <figure className="w-[70px] h-[70px] md:w-20 md:h-20 bg-gray-300 rounded-full overflow-hidden relative">
             <Image src={doc} alt={data.description} />
-            <div className="absolute top-0 right-0 w-10 h-10">
-              <Image src={fire} alt="Fire Icon" className="animate-pulse" />
-              {/* You can add CSS classes like animate-pulse for a pulsing effect */}
-            </div>
+           
           </figure>
-            <div className="absolute top-0 right-0 w-10 h-10">
-              <Image src={fire} alt="Fire Icon" className="animate-pulse" />
+            <div className="absolute top-0 left-0 w-10 h-10">
+              <Image src={fire} alt="Fire Icon" className="animate-pulse w-25 h-25" />
               {/* You can add CSS classes like animate-pulse for a pulsing effect */}
             </div>
         </div>
