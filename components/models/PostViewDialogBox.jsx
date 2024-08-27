@@ -13,11 +13,13 @@ const PostViewDialogBox = ({ isOpen, setIsOpen, data }) => {
     setIsOpen(false);
   }
 
-  const handleDownload = (url, filename) => if (data.premium) {
+  const handleDownload = (url, filename) => {
+    if (data.premium) {
       toast("This is a premium file. You need a premium membership to download it.");
     } else {
-    saveAs(url, `cn-${filename}`);
-    toast("successfully downloaded");
+      saveAs(url, `cn-${filename}`);
+      toast("successfully downloaded");
+    }
   };
 
   const SharePost = {
