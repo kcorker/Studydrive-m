@@ -26,6 +26,10 @@ const PostCard = ({ data }) => {
               {/* You can add CSS classes like animate-pulse for a pulsing effect */}
             </div>
           </figure>
+            <div className="absolute top-0 right-0 w-10 h-10">
+              <Image src={fire} alt="Fire Icon" className="animate-pulse" />
+              {/* You can add CSS classes like animate-pulse for a pulsing effect */}
+            </div>
         </div>
         <div className="text-start ml-5">
           <p className="text-base font-semibold font-sans md:font-mono  mt-2 text-white">
