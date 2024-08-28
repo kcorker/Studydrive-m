@@ -4,6 +4,7 @@ import { useState } from "react";
 import doc from "public/icons/doc.png";
 import fire from "public/icons/fire.png"; // Add your fire image or animation here
 import newt from "public/icons/new.png";
+import premiumIcon from "public/icons/premium.png";
 import PostViewDialogBox from "../models/PostViewDialogBox";
 
 const PostCard = ({ data }) => {
@@ -42,6 +43,12 @@ const PostCard = ({ data }) => {
           </p>
         </div>
       </div>
+      {/* Premium Tag */}
+      {data.premium && (
+        <div className="absolute top-0 left-0 w-10 h-10">
+          <Image src={premiumIcon} alt="Premium Tag Icon" className="w-20" />
+        </div>
+      )}
       {isOpen && (
         <PostViewDialogBox isOpen={isOpen} setIsOpen={setIsOpen} data={data} />
       )}
